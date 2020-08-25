@@ -8,6 +8,6 @@ public class PitchingStatsLookupController {
 
     @GetMapping("/home")
     public String home(){
-        return "Application is running!";
+        return "Application is running!!";
     }
 }
