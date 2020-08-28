@@ -2,6 +2,7 @@ package driver.pitching.service;
 
 import driver.pitching.dto.pitching.CareerPitchMetrics;
 import driver.pitching.dto.pitching.PitchMetrics;
+import driver.pitching.dto.pitching.Pitcher;
 import driver.pitching.repository.PitchMetricLookupRepository;
 import driver.pitching.repository.career.CareerPitchMetricsLookupRepository;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,8 @@ public class PitchMetricLookupService {
     }
 
     private CareerPitchMetrics mapPitchMetricsToCareerPitchMetrics(PitchMetrics pitchMetrics) {
-        return new CareerPitchMetrics();
+        CareerPitchMetrics careerPitchMetrics = new CareerPitchMetrics();
+        careerPitchMetrics.setPitchMetrics(pitchMetrics);
+        return careerPitchMetrics;
     }
 }

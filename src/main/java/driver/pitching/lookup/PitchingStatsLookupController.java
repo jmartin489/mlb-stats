@@ -1,6 +1,7 @@
 package driver.pitching.lookup;
 
 import driver.pitching.dto.pitching.CareerPitchMetrics;
+import driver.pitching.dto.pitching.Pitcher;
 import driver.pitching.repository.PitchMetricLookupRepository;
 import driver.pitching.service.PitchMetricLookupService;
 import org.springframework.beans.factory.annotation.Autowired;
