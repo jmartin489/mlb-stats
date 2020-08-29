@@ -32,18 +32,7 @@ public class CareerPitchMetricsLookupRepository implements PitchMetricLookupRepo
      * Move this to mapper util class
      * */
     private PitchMetrics mapApiDataToPitchMetricsDTO(Map pitcherProfile) {
-
-
-
-//        ResponseEntity responseEntity = (ResponseEntity) pitcherProfile;
-//        LinkedHashMap linkedHashMap = (LinkedHashMap) responseEntity.getBody();
-//        LinkedHashMap linkedHashMap1 = (LinkedHashMap) linkedHashMap.get("player");
-//        String firstName = (String) linkedHashMap1.get("first_name");
-//        System.out.println("His name is: " + firstName);
-
         PitchMetrics pitchMetrics = new PitchMetrics();
-        List<PitchType> pitchTypes = new ArrayList<>();
-
         Map<String, PitchMetaData> pitchMetaDataMap = new HashMap<>();
 
         List<Map> seasons = (List<Map>) pitcherProfile.get("seasons");
@@ -53,13 +42,21 @@ public class CareerPitchMetricsLookupRepository implements PitchMetricLookupRepo
             LinkedHashMap totals = (LinkedHashMap) item.get("totals");
             LinkedHashMap statistics = (LinkedHashMap) totals.get("statistics");
             LinkedHashMap pitchMetricsLinkedMap = (LinkedHashMap) statistics.get("pitch_metrics");
-            List<Map> pitch_types = (List<Map>) pitchMetricsLinkedMap.get("pitch_types");
+            List<HashMap> pitch_types = (List<HashMap>) pitchMetricsLinkedMap.get("pitch_types");
 
-            for(Map pitchType : pitch_types){
-                pitchMetaDataMap.put(pitchType.get("type"), PitchMetaData.builder().build());
+            for(HashMap pitchType : pitch_types){
+                if(pitchMetaDataMap.containsKey(pitchType.get("type"))){
+                    pitchMetaDataMap.put((String) pitchType.get("type"), PitchMetaData.builder().pitchTypeCount(pitchMetaDataMap.get(pitchType.get("type")).getPitchTypeCount() + (Integer) pitchType.get("count")).build());
+                }
+                else{
+                    pitchMetaDataMap.put((String) pitchType.get("type"), PitchMetaData.builder()
+                            .pitchTypeCount((Integer) pitchType.get("count"))
+                            .build());
+                }
             }
         }
-        pitchMetrics.setPitchType(pitchTypes);
+        pitchMetrics.setPitchMetaDataMap(pitchMetaDataMap);
+
         return pitchMetrics;
     }
 }
