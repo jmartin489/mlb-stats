@@ -2,6 +2,8 @@ package driver.pitching.client;
 
 import com.google.gson.Gson;
 import driver.pitching.dto.pitching.Pitcher;
+import driver.team.dto.DepthChart;
+import driver.team.dto.Team;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
