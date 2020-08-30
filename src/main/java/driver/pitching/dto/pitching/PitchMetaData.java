@@ -5,13 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class PitchMetaData {
     private Integer pitchTypeCount;
-    private Double pitchSpeed;
-    private Double pitchXLoc;
-    private Double pitchYLoc;
 }
